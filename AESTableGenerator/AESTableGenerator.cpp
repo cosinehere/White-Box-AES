@@ -324,6 +324,33 @@ void CalcTybox(const uint32_t *roundkey, uint32_t Tybox[][16][256], uint8_t Tbox
 
     CalcTbox(roundkey, Tbox);
     CalcTy(Ty);
+
+    for(int r=0;r<Nr-1;++r)
+    {
+        for (int x = 0; x < 256; ++x)
+        {
+            for (int j = 0; j < 4; ++j)
+            {
+                for (int i = 0; i < 4; ++i)
+                {
+                    uint32_t v0 = Ty[0][Tbox[r][j * 4 + i][x]][i],
+                        v1 = Ty[1][Tbox[r][j * 4 + i][x]][i],
+                        v2 = Ty[2][Tbox[r][j * 4 + i][x]][i],
+                        v3 = Ty[3][Tbox[r][j * 4 + i][x]][i];
+                    Tybox[r][j * 4 + i][x] = (v0 << 24) | (v1 << 16) | (v2 << 8) | v3;
+                    MBL[r][j * 4 + i][x] = x << ((3 - i) << 3);
+                }
+            }
+        }
+    }
+
+    for (int x = 0; x < 256; ++x)
+    {
+        for (int i = 0; i < 16; ++i)
+        {
+            Tboxlast[i][x] = Tbox[Nr - 1][i][x];
+        }
+    }
 }
 
 void GenerateWBCTable(FILE *out, const uint32_t *roundkey)
