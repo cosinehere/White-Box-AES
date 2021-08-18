@@ -30,11 +30,11 @@ void wbAES(uint8_t plain[16], uint8_t cipher[16])
 
             for (int j = 0; j < 4; ++j)
             {
-                uint8_t n0 = Xor[0][j * 24 + 6 * j + 0][(a >> (28 - 8 * j)) & 0xf][(b >> (28 - 8 * j)) & 0xf];
-                uint8_t n1 = Xor[0][i * 24 + 6 * j + 1][(c >> (28 - 8 * j)) & 0xf][(d >> (28 - 8 * j)) & 0xf];
-                uint8_t n2 = Xor[0][i * 24 + 6 * j + 2][(a >> (24 - 8 * j)) & 0xf][(b >> (24 - 8 * j)) & 0xf];
-                uint8_t n3 = Xor[0][i * 24 + 6 * j + 3][(c >> (24 - 8 * j)) & 0xf][(d >> (24 - 8 * j)) & 0xf];
-                plain[i * 4 + j] = (Xor[0][i * 24 + 6 * j + 4][n0][n1] << 4) | (Xor[0][i * 24 + 6 * j + 5][n2][n3]);
+                uint8_t n0 = Xor[r][j * 24 + 6 * j + 0][(a >> (28 - 8 * j)) & 0xf][(b >> (28 - 8 * j)) & 0xf];
+                uint8_t n1 = Xor[r][i * 24 + 6 * j + 1][(c >> (28 - 8 * j)) & 0xf][(d >> (28 - 8 * j)) & 0xf];
+                uint8_t n2 = Xor[r][i * 24 + 6 * j + 2][(a >> (24 - 8 * j)) & 0xf][(b >> (24 - 8 * j)) & 0xf];
+                uint8_t n3 = Xor[r][i * 24 + 6 * j + 3][(c >> (24 - 8 * j)) & 0xf][(d >> (24 - 8 * j)) & 0xf];
+                plain[i * 4 + j] = (Xor[r][i * 24 + 6 * j + 4][n0][n1] << 4) | (Xor[r][i * 24 + 6 * j + 5][n2][n3]);
             }
 
             a = MBL[r][i * 4 + 0][plain[i * 4 + 0]];
@@ -44,11 +44,11 @@ void wbAES(uint8_t plain[16], uint8_t cipher[16])
 
             for (int j = 0; j < 4; ++j)
             {
-                uint8_t n0 = Xor[0][j * 24 + 6 * j + 0][(a >> (28 - 8 * j)) & 0xf][(b >> (28 - 8 * j)) & 0xf];
-                uint8_t n1 = Xor[0][i * 24 + 6 * j + 1][(c >> (28 - 8 * j)) & 0xf][(d >> (28 - 8 * j)) & 0xf];
-                uint8_t n2 = Xor[0][i * 24 + 6 * j + 2][(a >> (24 - 8 * j)) & 0xf][(b >> (24 - 8 * j)) & 0xf];
-                uint8_t n3 = Xor[0][i * 24 + 6 * j + 3][(c >> (24 - 8 * j)) & 0xf][(d >> (24 - 8 * j)) & 0xf];
-                plain[i * 4 + j] = (Xor[0][i * 24 + 6 * j + 4][n0][n1] << 4) | (Xor[0][i * 24 + 6 * j + 5][n2][n3]);
+                uint8_t n0 = Xor[r][j * 24 + 6 * j + 0][(a >> (28 - 8 * j)) & 0xf][(b >> (28 - 8 * j)) & 0xf];
+                uint8_t n1 = Xor[r][i * 24 + 6 * j + 1][(c >> (28 - 8 * j)) & 0xf][(d >> (28 - 8 * j)) & 0xf];
+                uint8_t n2 = Xor[r][i * 24 + 6 * j + 2][(a >> (24 - 8 * j)) & 0xf][(b >> (24 - 8 * j)) & 0xf];
+                uint8_t n3 = Xor[r][i * 24 + 6 * j + 3][(c >> (24 - 8 * j)) & 0xf][(d >> (24 - 8 * j)) & 0xf];
+                plain[i * 4 + j] = (Xor[r][i * 24 + 6 * j + 4][n0][n1] << 4) | (Xor[r][i * 24 + 6 * j + 5][n2][n3]);
             }
         }
     }
